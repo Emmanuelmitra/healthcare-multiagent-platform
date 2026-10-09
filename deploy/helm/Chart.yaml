@@ -1,0 +1,5 @@
+apiVersion: v2
+name: healthcare-multiagent
+description: A Helm chart for Enterprise Healthcare Multi-Agent AI Platform
+version: 0.1.0
+appVersion: "1.0.0"

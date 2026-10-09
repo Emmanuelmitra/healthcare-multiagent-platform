@@ -1,0 +1,27 @@
+version: '3.8'
+
+services:
+  agent-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: healthcare-agent-service
+    ports:
+      - "8000:8000"
+    environment:
+      - APP_NAME=Healthcare-MultiAgent-Platform
+      - APP_ENV=production
+      - GEMINI_API_KEY=${GEMINI_API_KEY:-mock_key}
+      - GEMINI_MODEL=gemini-2.5-flash
+      - REDIS_URL=redis://redis:6379/0
+      - MEMORY_BACKEND=redis
+    depends_on:
+      - redis
+    restart: unless-stopped
+
+  redis:
+    image: redis:7-alpine
+    container_name: healthcare-agent-redis
+    ports:
+      - "6379:6379"
+    restart: unless-stopped
